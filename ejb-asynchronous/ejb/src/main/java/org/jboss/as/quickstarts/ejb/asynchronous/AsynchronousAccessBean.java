@@ -20,8 +20,10 @@ import java.util.Date;
 import java.util.concurrent.Future;
 import java.util.logging.Logger;
 
+import javax.annotation.Resource;
 import javax.ejb.AsyncResult;
 import javax.ejb.Asynchronous;
+import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 
 /**
@@ -38,6 +40,9 @@ import javax.ejb.Stateless;
 @Stateless
 public class AsynchronousAccessBean implements AsynchronousAccess, AnotherAsynchronousAccess {
     private static final Logger LOGGER = Logger.getLogger(AsynchronousAccessBean.class.getName());
+    
+    @Resource
+    SessionContext ctx;
 
     @Asynchronous
     @Override
@@ -72,6 +77,28 @@ public class AsynchronousAccessBean implements AsynchronousAccess, AnotherAsynch
         throw new IllegalAccessException("Asynchrounous fail demonstration");
     }
 
+    @Asynchronous
+    @Override
+    public Future<String> cancelationAsync(int sleepSeconds) {
+        LOGGER.info("Will wait for " + sleepSeconds + "s");
+        for (int i = 0; i < sleepSeconds; i++) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                LOGGER.info("timer Interrupt");
+                break;
+            }
+            if(ctx.wasCancelCalled()) {
+                LOGGER.warning("The client request the cancelation");
+                return new AsyncResult<String>("returning at " + new Date() + " after cancelation; duration was " + i + "s");
+            }else{
+                LOGGER.info("... still not canceled");
+            }
+        }
+        LOGGER.info("returning the result");
+        return new AsyncResult<String>("returning at " + new Date() + " duration was " + sleepSeconds + "s");
+    }
+    
     @Override
     public Future<String> interfaceAsync(long sleepTime) {
         LOGGER.info("Will wait for " + sleepTime + "ms");

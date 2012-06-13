@@ -134,7 +134,7 @@ public class AsynchronousClient {
         } catch (ExecutionException e) {
             // TODO This is a bug in AS7.1.1.Final, in further versions the first cause is direct the IllegalAccessException
             // (JBoss AS 7.2.0.Alpha1-SNAPSHOT)
-            if (e.getCause().getCause() instanceof IllegalAccessException) {
+            if (e.getCause() instanceof IllegalAccessException) {
                 LOGGER.info("Catch the expected Exception of the asynchronous execution!");
             } else {
                 throw new RuntimeException("Unexpected ExecutionException during asynchronous call!", e);
@@ -143,21 +143,44 @@ public class AsynchronousClient {
     }
 
     /**
+     * Invoke a synchronous EJB method that uses asynchronous calls internally to improve the duration.
+     * @throws InterruptedException 
+     * @throws ExecutionException 
+     */
+    private void checkAsyncCancel() throws InterruptedException, ExecutionException {
+        Future<String> result = accessBean.cancelationAsync(20);
+        Thread.sleep(200); // wait some time
+        
+        LOGGER.info("Request cancel");
+        boolean cancel = result.cancel(true);
+        if(!cancel) {
+            LOGGER.info("Method can not be canceled!");
+        }else{
+            LOGGER.info("Cancel request successful");
+            if(!result.isCancelled()) {
+                LOGGER.warning("The result is not marked as canceled!");
+            }
+        }
+        //result.get();
+    }
+    /**
      * Call all the different asynchronous methods.
      * 
      * @param args no arguments needed
      */
     public static void main(String[] args) throws Exception {
         AsynchronousClient client = new AsynchronousClient();
-
-        client.fireAndForget();
-        client.getAResultAsync();
-        client.waitForAsyncResult();
-
-        client.callAsyncWithFailure();
-
-        client.callAnEJBwithAsyncAccess();
-        client.waitForAnotherAsyncResult2();
+//
+//        client.fireAndForget();
+//        client.getAResultAsync();
+//        client.waitForAsyncResult();
+//
+//        client.callAsyncWithFailure();
+//
+//        client.callAnEJBwithAsyncAccess();
+//        client.waitForAnotherAsyncResult2();
+        
+        client.checkAsyncCancel();
     }
 
 }

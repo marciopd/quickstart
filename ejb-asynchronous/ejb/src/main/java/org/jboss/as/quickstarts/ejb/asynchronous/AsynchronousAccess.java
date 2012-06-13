@@ -47,4 +47,16 @@ public interface AsynchronousAccess {
      * @throws Exception ever for demonstration purpose
      */
     Future<String> failure() throws IllegalAccessException;
+    
+    /**
+     * An example method to demonstrate how a asynchronous call can be canceled from the client side.
+     * It will wait the given seconds and return a 'normal' string if the client does not request to cancel.
+     * Check every 500ms whether the client request cancel and send the result with the time marked as canceled.
+     * 
+     * 
+     * @param sleepSeconds seconds to wait for demonstration
+     * @return a simple string with a timestamp when the method is finished
+     */
+    Future<String> cancelationAsync(int sleepSeconds);
+
 }
