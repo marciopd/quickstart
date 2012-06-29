@@ -1,0 +1,46 @@
+# stop the preconfigured server for the domain
+/host=master/server-config=server-one:write-attribute(name=auto-start, value=false)
+/host=master/server-config=server-two:write-attribute(name=auto-start, value=false)
+/host=master/server-config=server-one:stop
+/host=master/server-config=server-two:stop
+
+batch
+
+# add the socket binding to the full-sockets, used by the app-main server
+/socket-binding-group=full-sockets/remote-destination-outbound-socket-binding=remote-ejb-1:add(host=localhost, port=4547)
+/socket-binding-group=full-sockets/remote-destination-outbound-socket-binding=remote-ejb-2:add(host=localhost, port=4647)
+
+# add the outbound connections to the remoting subsystem of the full-profile used by app-main server
+/profile=full/subsystem=remoting/remote-outbound-connection=remote-ejb-connection-1:add(outbound-socket-binding-ref=remote-ejb-1, security-realm=ejb-security-realm-1, username=quickuser1)
+/profile=full/subsystem=remoting/remote-outbound-connection=remote-ejb-connection-1/property=SASL_POLICY_NOANONYMOUS:add(value=false)
+/profile=full/subsystem=remoting/remote-outbound-connection=remote-ejb-connection-1/property=SSL_ENABLED:add(value=false)
+/profile=full/subsystem=remoting/remote-outbound-connection=remote-ejb-connection-2:add(outbound-socket-binding-ref=remote-ejb-2, security-realm=ejb-security-realm-2, username=quickuser2)
+/profile=full/subsystem=remoting/remote-outbound-connection=remote-ejb-connection-2/property=SASL_POLICY_NOANONYMOUS:add(value=false)
+/profile=full/subsystem=remoting/remote-outbound-connection=remote-ejb-connection-2/property=SSL_ENABLED:add(value=false)
+
+# add the security realms with the secret (password base64) values for the server communication
+/host=master/core-service=management/security-realm=ejb-security-realm-1:add()
+/host=master/core-service=management/security-realm=ejb-security-realm-1/server-identity=secret:add(value=cXVpY2sxMjMr)
+/host=master/core-service=management/security-realm=ejb-security-realm-2:add()
+/host=master/core-service=management/security-realm=ejb-security-realm-2/server-identity=secret:add(value=cXVpY2srMTIz)
+
+#add the main-server group and the server which handle the standalone client requests
+/server-group=quickstart-ejb-multi-main-server:add(profile=full,socket-binding-group=full-sockets)
+/server-group=quickstart-ejb-multi-main-server/jvm=default:add(permgen-size=64m, max-permgen-size=128m)
+/host=master/server-config=app-main:add(auto-start=true, group=quickstart-ejb-multi-main-server)
+
+#add the app-server group and the servers for the destination application
+/server-group=quickstart-ejb-multi-appOne-server:add(profile=default,socket-binding-group=standard-sockets)
+/server-group=quickstart-ejb-multi-appOne-server/jvm=default:add(permgen-size=64m, max-permgen-size=128m)
+/host=master/server-config=app-one:add(auto-start=true, group=quickstart-ejb-multi-appOne-server, socket-binding-port-offset=100)
+
+/server-group=quickstart-ejb-multi-appTwo-server:add(profile=default,socket-binding-group=standard-sockets)
+/server-group=quickstart-ejb-multi-appTwo-server/jvm=default:add(permgen-size=64m, max-permgen-size=128m)
+/host=master/server-config=app-two:add(auto-start=true, group=quickstart-ejb-multi-appTwo-server, socket-binding-port-offset=200)
+
+# finally start the configured servers
+/host=master/server-config=app-one:start
+/host=master/server-config=app-two:start
+/host=master/server-config=app-main:start
+
+run-batch

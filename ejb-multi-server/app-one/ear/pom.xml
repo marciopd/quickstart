@@ -1,0 +1,59 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.jboss.as.quickstarts</groupId>
+		<artifactId>jboss-as-ejb-multi-server-appOne</artifactId>
+		<version>7.1.1-FINAL</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+  <artifactId>jboss-as-ejb-multi-server-appOne-ear</artifactId>
+  <packaging>ear</packaging>
+  <name>JBoss AS Quickstarts: multiple server application - AppOne EAR</name>
+
+   <dependencies>
+     <dependency>
+       <groupId>org.jboss.as.quickstarts</groupId>
+       <artifactId>jboss-as-ejb-multi-server-appOne-ejb</artifactId>
+       <type>ejb</type>
+       <version>${project.version}</version>
+     </dependency>
+	<dependency>
+		<groupId>org.jboss.as</groupId>
+		<artifactId>jboss-as-ejb-client-bom</artifactId>
+		<scope>provided</scope>
+		<type>pom</type>
+	</dependency>
+   </dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-ear-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<displayName>Application One</displayName>
+					<description>A simple quickstart application to demonstrate the
+						server-server communication</description>
+					<version>6</version>
+					<!-- it work also without a application.xml but this is to demonstrate 
+						how to use it and activate the jarModule in it -->
+					<generateApplicationXml>true</generateApplicationXml>
+					<modules>
+						<ejbModule>
+							<groupId>org.jboss.as.quickstarts</groupId>
+							<artifactId>jboss-as-ejb-multi-server-appOne-ejb</artifactId>
+							<bundleFileName>ejb.jar</bundleFileName>
+						</ejbModule>
+					</modules>
+					<archive>
+						<addMavenDescriptor>false</addMavenDescriptor>
+						<!--manifest> <addClasspath>true</addClasspath> </manifest -->
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+		<finalName>appone</finalName>
+	</build>
+</project>

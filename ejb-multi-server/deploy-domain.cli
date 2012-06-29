@@ -1,0 +1,3 @@
+deploy app-one/ear/target/appone.ear --server-groups=quickstart-ejb-multi-appOne-server
+deploy app-two/ear/target/apptwo.ear --server-groups=quickstart-ejb-multi-appTwo-server
+deploy app-main/ear/target/appmain.ear --server-groups=quickstart-ejb-multi-main-server
