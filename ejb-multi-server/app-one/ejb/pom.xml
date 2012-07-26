@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.jboss.as.quickstarts</groupId>
 		<artifactId>jboss-as-ejb-multi-server-appOne</artifactId>
@@ -8,15 +8,12 @@
 	</parent>
 
 
-  <artifactId>jboss-as-ejb-multi-server-appOne-ejb</artifactId>
+	<artifactId>jboss-as-ejb-multi-server-appOne-ejb</artifactId>
 
-  <name>JBoss AS Quickstarts: multiple server application - AppOne EJB</name>
-  <url>http://maven.apache.org</url>
-  <packaging>ejb</packaging>
+	<name>JBoss AS Quickstarts: multiple server application - AppOne EJB</name>
+	<url>http://maven.apache.org</url>
+	<packaging>ejb</packaging>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
 
   <dependencies>
     <dependency>
@@ -29,6 +26,10 @@
     	<artifactId>jboss-as-ejb-client-bom</artifactId>
     	<type>pom</type>
     </dependency>
+    <dependency>
+    	<groupId>org.jboss.spec.javax.annotation</groupId>
+    	<artifactId>jboss-annotations-api_1.1_spec</artifactId>
+    </dependency>
   </dependencies>
 
 	<build>
@@ -39,23 +40,7 @@
 				<version>2.3</version>
 				<configuration>
 					<ejbVersion>3.0</ejbVersion>
-					<source>1.6</source>
-					<target>1.6</target>
 					<generateClient>true</generateClient>
-					<!--
-					<clientIncludes>
-						<clientInclude>**/*.class</clientInclude>
-					</clientIncludes>
-					<clientExcludes>
-						<clientExclude>**/*Intern*</clientExclude>
-						<clientExclude>**/*Bean.class</clientExclude>
-						<clientExclude>**/*Interceptor.class</clientExclude>
-					</clientExcludes>
-					<excludes>
-					  <exclude>**/*Test.class</exclude>
-					  <exclude>**/*Demo.class</exclude>
-					</excludes>
-					-->
 					<archive>
 						<addMavenDescriptor>false</addMavenDescriptor>
 					</archive>

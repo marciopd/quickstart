@@ -18,12 +18,11 @@
 	<parent>
 		<groupId>org.jboss.as.quickstarts</groupId>
 		<artifactId>jboss-as-ejb-multi-server</artifactId>
-		<relativePath>../pom.xml</relativePath>
 		<version>7.1.1-FINAL</version>
 	</parent>
 
-  <modules>
-	  <module>ejb</module>
-	  <module>ear</module>
-  </modules>
+	<modules>
+		<module>ejb</module>
+		<module>ear</module>
+	</modules>
 </project>

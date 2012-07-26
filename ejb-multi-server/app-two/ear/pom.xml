@@ -1,31 +1,30 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
 		<groupId>org.jboss.as.quickstarts</groupId>
 		<artifactId>jboss-as-ejb-multi-server-appTwo</artifactId>
 		<version>7.1.1-FINAL</version>
-		<relativePath>../pom.xml</relativePath>
 	</parent>
-  <artifactId>jboss-as-ejb-multi-server-appTwo-ear</artifactId>
-  <packaging>ear</packaging>
-  <name>JBoss AS Quickstarts: multiple server application - AppTwo EAR</name>
+	<artifactId>jboss-as-ejb-multi-server-appTwo-ear</artifactId>
+	<packaging>ear</packaging>
+	<name>JBoss AS Quickstarts: multiple server application - AppTwo EAR</name>
 
-   <dependencies>
-     <dependency>
-       <groupId>org.jboss.as.quickstarts</groupId>
-       <artifactId>jboss-as-ejb-multi-server-appTwo-ejb</artifactId>
-       <type>ejb</type>
-       <version>${project.version}</version>
-     </dependency>
-	<dependency>
-		<groupId>org.jboss.as</groupId>
-		<artifactId>jboss-as-ejb-client-bom</artifactId>
-		<scope>provided</scope>
-		<type>pom</type>
-	</dependency>
-   </dependencies>
+	<dependencies>
+		<dependency>
+			<groupId>org.jboss.as.quickstarts</groupId>
+			<artifactId>jboss-as-ejb-multi-server-appTwo-ejb</artifactId>
+			<type>ejb</type>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.as</groupId>
+			<artifactId>jboss-as-ejb-client-bom</artifactId>
+			<scope>provided</scope>
+			<type>pom</type>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<plugins>
