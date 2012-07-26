@@ -42,6 +42,11 @@ public class MainAppBean implements MainApp {
     }
 
     @Override
+    public String getJBossNodeName() {
+        return System.getProperty("jboss.node.name");
+    }
+
+    @Override
     public String invokeAll(String text) {
         Principal caller = context.getCallerPrincipal();
         LOGGER.info("["+caller.getName()+"] "+text);

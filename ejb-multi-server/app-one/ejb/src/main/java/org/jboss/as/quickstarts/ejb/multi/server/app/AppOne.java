@@ -7,4 +7,6 @@ public interface AppOne {
 
     String invoke(String text);
 
+    String getJBossNodeName();
+    
 }
