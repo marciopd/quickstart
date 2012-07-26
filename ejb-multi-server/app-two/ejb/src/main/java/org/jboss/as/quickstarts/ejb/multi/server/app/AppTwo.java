@@ -7,4 +7,6 @@ public interface AppTwo {
 
     String invoke(String text);
 
+    String getJBossNodeName();
+
 }

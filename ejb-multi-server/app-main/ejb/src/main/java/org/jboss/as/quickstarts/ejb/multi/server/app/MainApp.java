@@ -14,4 +14,6 @@ public interface MainApp {
      */
     String invokeAll(String text);
 
+    String getJBossNodeName();
+
 }

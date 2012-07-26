@@ -14,9 +14,14 @@ public @Stateless class AppTwoBean implements AppTwo {
     @Resource SessionContext context;
     
     @Override
+    public String getJBossNodeName() {
+        return System.getProperty("jboss.node.name");
+    }
+
+    @Override
     public String invoke(String text) {
         Principal caller = context.getCallerPrincipal();
         LOGGER.info("["+caller.getName()+"] "+text);
-        return "app2["+caller.getName()+"]@"+System.getProperty("jboss.node.name");
+        return "app2["+caller.getName()+"]@"+getJBossNodeName();
     }
 }
