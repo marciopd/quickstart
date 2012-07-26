@@ -69,12 +69,46 @@ _NOTE: The following build command assumes you have configured your Maven user s
         
 
 
-Access the ic-properties application
+Access the ic-properties applications
 ---------------------
+
+There are different Main-classes to show the behavior of the scoped InitialContext lookup.
+Be sure that the preparations are done:
 
 1. Make sure that the deployment are successful as described above.
 2. navigate to the ic-properties root directory of this quickstart.
-3. Type this command to run the application
+
+The MultithreadClient will run a single application with two threads where each Thread will access a different server and check whether
+the response is not of a different one.
+
+   Type this command to run the application
+
+        `mvn exec:mvn exec:java -Dexec.mainClass="org.jboss.as.quickstarts.ejb.clients.MultithreadClient`
+        
+        The output of the client will show you that the applications are invoked as expected on different servers:
+
+          Server call statistic : {app1[anonymous]@master:app-one=10}
+          Server call statistic : {app1[anonymous]@master:app-oneA=10}
+          The allowed number of nodes in the threads are called
+
+        The statistic shows that one thread receive 10 times the answer String 'app1[anonymous]@master:app-one' which mean
+			  that the application one is called at the server with the node.name 'master:app-one'.
+			  The second thread receive 10 times the answer from the server with node.name 'master:app-oneA' which has the same
+			  application deployed.
+			  Also the message 'The allowed number of nodes in the threads are called' show that all invocations are as expected.
+
+        In the logfiles of the different servers you might follow the invocations on server-side.
+
+_NODE: If the feature is not used the different calles get mixed because the ejb-client is not divided in scopes and the application is invoked 
+by using the identifier (ejb:app/module/Bean!View). In this test the application is deployed on both servers app-one and app-oneA._
+
+
+
+The MultiContentClient use the scoped ejb-client-context to have different proxies for the same application (bean) and invoke these proxies
+in the same thread multiple times and check whether the answer respond the correct server name or one of the expected server-names if it
+is expected for loadbalancing.
+
+   Type this command to run the application
 
         `mvn exec:mvn exec:java -Dexec.mainClass="org.jboss.as.quickstarts.ejb.clients.MultiContentClient`
         
