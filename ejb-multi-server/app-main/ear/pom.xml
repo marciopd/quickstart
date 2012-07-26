@@ -6,7 +6,6 @@
 		<groupId>org.jboss.as.quickstarts</groupId>
 		<artifactId>jboss-as-ejb-multi-server-appMain</artifactId>
 		<version>7.1.1-FINAL</version>
-		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>jboss-as-ejb-multi-server-appMain-ear</artifactId>
 	<packaging>ear</packaging>
