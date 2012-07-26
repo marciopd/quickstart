@@ -1,0 +1,8 @@
+batch
+#add the app-server group and the servers for the destination application
+/host=master/server-config=app-oneA:add(auto-start=true, group=quickstart-ejb-multi-appOne-server, socket-binding-port-offset=1000)
+
+# finally start the configured servers
+/host=master/server-config=app-oneA:start
+
+run-batch
