@@ -9,4 +9,6 @@ public interface AppTwo {
 
     String getJBossNodeName();
 
+    String invokeSecured(String text);
+
 }
