@@ -53,3 +53,6 @@ batch
 /host=master/server-config=app-main:start
 
 run-batch
+
+# without restart, outside the batch, the application will not deploy successfully
+:restart-servers

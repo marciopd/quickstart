@@ -62,7 +62,6 @@ With this quickstart scripts are provided to configure a standard JBoss AS7 or E
      `bin/add-user.sh -a -u quickuser1 -p quick123+ --silent`
      `bin/add-user.sh -a -u quickuser2 -p quick+123 --silent`
  
- * Restart the domain. This is necessary because of some configurations, otherwise the deploy will not work.
 
 
 Build and Deploy the Quickstart
