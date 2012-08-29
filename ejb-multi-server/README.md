@@ -107,7 +107,7 @@ Undeploy the Archive
 2. Open a command line and navigate to the root directory of this quickstart.
 3. When you are finished testing, type this command to undeploy the archive:
 
-       `JBOSS_HOME/bin/jboss-cli.sh --connect --file=undeploy-domain.sh`
+       `JBOSS_HOME/bin/jboss-cli.sh --connect --file=undeploy-domain.cli`
 
 
 
