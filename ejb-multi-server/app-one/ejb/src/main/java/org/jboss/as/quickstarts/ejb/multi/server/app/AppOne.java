@@ -26,5 +26,4 @@ public interface AppOne {
      * @return app1[&lt;PrincipalName&gt;]@&lt;jboss.node.name&gt;
      */
     String invokeSecured(String text);
-
 }
