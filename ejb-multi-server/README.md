@@ -53,7 +53,7 @@ With this quickstart scripts are provided to configure a standard JBoss AS7 or E
      
  * navigate to the project root directory and run the following command
  
-     `JBOSS_HOME/bin/jboss-cli.sh --connect --file=install-domain.sh`
+     `JBOSS_HOME/bin/jboss-cli.sh --connect --file=install-domain.cli`
      
  * Add application user  [Add an Application User](../README.md#addapplicationuser)
    To add all necessary users run the following commands, please use this usernames and paswords because the domain configuration and the client use it.
@@ -78,7 +78,7 @@ _NOTE: The following build command assumes you have configured your Maven user s
         
 4. Deploy the applications by using the provided CLI batch script
 
-       `JBOSS_HOME/bin/jboss-cli.sh --connect --file=deploy-domain.sh`
+       `JBOSS_HOME/bin/jboss-cli.sh --connect --file=deploy-domain.cli`
        
      This will deploy the app-*.ear files to different server-groups of the running domain.
 
