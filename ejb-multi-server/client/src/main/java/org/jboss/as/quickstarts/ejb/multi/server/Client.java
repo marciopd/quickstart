@@ -2,6 +2,8 @@ package org.jboss.as.quickstarts.ejb.multi.server;
 
 import java.util.Date;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -20,6 +22,10 @@ public class Client {
      * @throws Exception 
      */
     public static void main(String[] args) throws Exception {
+        // suppress output of client messages
+        Logger.getLogger("org.jboss").setLevel(Level.OFF);
+        Logger.getLogger("org.xnio").setLevel(Level.OFF);
+        
         Properties p = new Properties();
         p.put("remote.connectionprovider.create.options.org.xnio.Options.SSL_ENABLED", "false");
         p.put("remote.connections", "one");

@@ -11,6 +11,8 @@ batch
 /server-group=main-server-group:remove
 /server-group=other-server-group:remove
 
+# disable the local authentication for applications
+/host=master/core-service=management/security-realm=ApplicationRealm/authentication=local:remove
 
 # add the socket binding to the full-sockets, used by the app-main server
 /socket-binding-group=full-sockets/remote-destination-outbound-socket-binding=remote-ejb-1:add(host=localhost, port=4547)

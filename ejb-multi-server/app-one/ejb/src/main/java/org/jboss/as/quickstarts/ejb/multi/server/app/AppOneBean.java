@@ -9,8 +9,17 @@ import javax.ejb.Stateless;
 
 import org.jboss.logging.Logger;
 
-
-public @Stateless class AppOneBean implements AppOne {
+/**
+ * <p>Simple bean with methods to get the node name of the server and log messages.
+ * One method is annotated with a security role. The security-domain is declared within the 
+ * deployment descriptor jboss-ejb3.xml instead of using the annotation.</p>
+ * <p>If the security-domain is removed the secured method can be invoked from every user.
+ * The shown principal user is 'anonymous' instead of the original logged in user (AS 7.1, 7.2 and EAP6.0)</p>
+ *  
+ * @author <a href="mailto:wfink@redhat.com">Wolf-Dieter Fink</a>
+ */
+@Stateless 
+public class AppOneBean implements AppOne {
     private static final Logger LOGGER = Logger.getLogger(AppOneBean.class);
     
     @Resource SessionContext context;

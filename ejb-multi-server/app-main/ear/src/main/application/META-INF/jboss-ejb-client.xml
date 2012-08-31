@@ -1,7 +1,9 @@
 <jboss-ejb-client xmlns="urn:jboss:ejb-client:1.0">
     <client-context>
         <ejb-receivers>
+            <!-- this is the connection to access the app-one -->
             <remoting-ejb-receiver outbound-connection-ref="remote-ejb-connection-1"/>
+            <!-- this is the connection to access the app-two -->
             <remoting-ejb-receiver outbound-connection-ref="remote-ejb-connection-2"/>
         </ejb-receivers>
     </client-context>
