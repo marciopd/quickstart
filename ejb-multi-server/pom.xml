@@ -120,6 +120,7 @@
     <module>app-one</module>
     <module>app-two</module>
     <module>app-main</module>
+    <module>app-web</module>
     <module>client</module>
   </modules>
 </project>

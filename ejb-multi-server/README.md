@@ -16,12 +16,14 @@ Also the configuration is done by CLI batch-scripts.
 
 The example is composed of multiple maven projects, each with a shared parent. The projects are as follows:
 
-app-*   : Simple application contain an ejb and ear sub-project to build the ejb.jar and app.ear file
-          The application is only one EJB that log a statement if called and return the jboss.node.name
+app-one/two   : Simple application contain an ejb and ear sub-project to build the ejb.jar and app.ear file
+                The application is only one EJB that log a statement if called and return the jboss.node.name
 
-app-main: Application which can is called by the 'client' and call the different sub-applications
+app-main      : Application which can is called by the 'client' and call the different sub-applications
 
-client  : This project builds the standalone client and execute it
+app-web       : A simple war application with only one servlet to show how to invoke EJB's on a different server
+
+client        : This project builds the standalone client and execute it
 
 The root `pom.xml` builds each of the subprojects in the above order.
 
