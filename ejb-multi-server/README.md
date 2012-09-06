@@ -84,7 +84,7 @@ _NOTE: The following build command assumes you have configured your Maven user s
      This will deploy the app-*.ear files to different server-groups of the running domain.
 
 
-Access the application
+Access the remote-client application
 ---------------------
 
 1. Make sure that the deployment are successful as described above.
@@ -100,6 +100,23 @@ Access the application
 
         The line shows that the MainApp is called with the user 'anonymous' at node 'master:app-main' and the sub-call is proceeded by the 'master:app-one' node.
         In the logfiles of the different servers you might follow the invocations on server-side.
+
+
+Access the JSF application inside the main-application
+---------------------
+
+1. Make sure that the deployment are successful as described above.
+2. Use a browser to access localhost:8080/multi-server-MainApp
+3. Insert a message in the Text input and invoke the different methods, the result is shown in the browser
+4. See server logfiles and find your given message logged as INFO.
+
+
+Access the Servlet application deployed as a WAR inside a minimal server
+---------------------
+
+1. Make sure that the deployment are successful as described above.
+2. Use a browser to access localhost:8380/appweb
+3. The servlet will invoke the remote EJB's directly and show the results, compare that the invocation is successful
 
 
 Undeploy the Archive
