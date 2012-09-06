@@ -1,7 +1,7 @@
 ejb-multi-server: EJB applications deployed in different servers communicating vie EJB remote calls
 ======================================================
 Author: Wolf-Dieter Fink
-Level: Intermediate
+Level: Advanced
 Technologies: EJB, EAR
 
 
