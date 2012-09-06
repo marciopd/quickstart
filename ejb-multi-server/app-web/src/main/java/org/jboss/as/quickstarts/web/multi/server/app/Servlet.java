@@ -19,6 +19,8 @@ package org.jboss.as.quickstarts.web.multi.server.app;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Hashtable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -38,11 +40,13 @@ import org.jboss.as.quickstarts.ejb.multi.server.app.AppTwo;
  */
 @WebServlet(urlPatterns = "/*")
 public class Servlet extends HttpServlet {
-
+    private static final Logger LOGGER = Logger.getLogger(Servlet.class.getName());
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response ) {
 	    boolean fail = false;
+
+	    LOGGER.info("Servlet is called "+new Date());
 
 		response.setContentType("html");
         write(response,"<h1>Example Servlet to show how EJB's can be invoked</h1>");
@@ -63,8 +67,10 @@ public class Servlet extends HttpServlet {
                     fail = true;
                 }
             }catch(Exception n) {
-                write(response, "Failed to invoke AppOne");
+                LOGGER.log(Level.SEVERE,"Failed to invoke AppOne",n);
+                write(response, "Failed to invoke AppOne<br/>");
                 write(response, n.getMessage());
+                fail = true;
             }
             write(response,"<h2>Invoke AppTwo on different server</h2>");
             try {
@@ -77,8 +83,10 @@ public class Servlet extends HttpServlet {
                     fail = true;
                 }
             }catch(Exception n) {
-                write(response, "Failed to invoke AppTwo");
+                LOGGER.log(Level.SEVERE,"Failed to invoke AppTwo",n);
+                write(response, "Failed to invoke AppTwo<br/>");
                 write(response, n.getMessage());
+                fail = true;
             }
 		} catch (NamingException e) {
             write(response,"<h2>Failed to initialize InitialContext</h2>");
