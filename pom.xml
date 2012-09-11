@@ -53,6 +53,7 @@
                 <module>cdi-injection</module>
                 <module>ejb-in-ear</module>
                 <module>ejb-in-war</module>
+                <module>ejb-multi-server</module>
                 <module>ejb-remote</module>
                 <module>ejb-security</module>
                 <module>greeter</module>
